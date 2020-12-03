@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "16697007841",
+    "firebase_url": "https://proyectofinaleco-406ac.firebaseio.com",
+    "project_id": "proyectofinaleco-406ac",
+    "storage_bucket": "proyectofinaleco-406ac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:16697007841:android:730346687a34c2088f61a0",
+        "android_client_info": {
+          "package_name": "com.example.apartado_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "16697007841-tth3lfo5tapl6ipveg779mpk7dnbo912.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.apartado_android",
+            "certificate_hash": "6030fe2e0824ebc0192e4f4e9fd8dded3dd8adf1"
+          }
+        },
+        {
+          "client_id": "16697007841-7lls98is43c9la6baeheupd95tqe333q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzrv0zk9d_yhQiX3OG7jJdwg5ZtbbfM7I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "16697007841-7lls98is43c9la6baeheupd95tqe333q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
