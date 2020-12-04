@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private FirebaseDatabase database;
 
-
     private EditText calificacion;
 
     private Button envio;
@@ -40,32 +39,80 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Question = findViewById(R.id.pregunta);
 
         envio.setOnClickListener(this);
+
+        vistaPregunta();
+
     }
+
+    public void vistaPregunta() {
+
+        DatabaseReference reference = database.getReference().child("Preguntas");
+        reference.addValueEventListener(
+
+                new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        String preguntaActual = "PreguntaActual";
+
+                        for (DataSnapshot child : snapshot.getChildren()) {
+
+                            Pregunta pregunta = child.getValue(Pregunta.class);
+
+                            if(pregunta.getEstado().equals(preguntaActual)) {
+
+                                Question.setText("");
+                                Question.append(pregunta.getPregunta());
+
+                            } else {
+
+                                Question.setText("");
+                                Question.append("Espere Una pregunta del anfitrión");
+
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                }
+        );
+    }
+
 
     public void send() {
 
-        database.getReference().child("Preguntas").addListenerForSingleValueEvent(
+        DatabaseReference ref = database.getReference().child("Preguntas");
+        ref.addValueEventListener(
 
                 new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot snapshot) {
+                        for (DataSnapshot child : snapshot.getChildren()){
 
-                        String r = calificacion.getText().toString().trim();
-                        String idQuestion  = UUID.randomUUID().toString();
-                        Pregunta pregunta = snapshot.getValue(Pregunta.class);
+                            Pregunta pregunta = child.getValue(Pregunta.class);
 
-                        String preguntaActual = "PreguntaActual";
+                            String r = calificacion.getText().toString().trim();
+                            String idQuestion  = UUID.randomUUID().toString();
 
-                        if(pregunta.getEstado() == preguntaActual){
+                            String preguntaActual = "PreguntaActual";
 
-                            Respuesta respuesta = new Respuesta(
+                            if(pregunta.getEstado().equals(preguntaActual)) {
 
-                                    idQuestion,
-                                    r
+                                Respuesta respuesta = new Respuesta(
 
-                            );
-                            database.getReference().child(pregunta.getId()).child(idQuestion).setValue(respuesta);
-                            calificacion.setText("");
+                                        idQuestion,
+                                        r
+
+                                );
+
+                                database.getReference().child("Respuestas").child(pregunta.getId()).child(idQuestion).setValue(respuesta);
+                                calificacion.setText("");
+
+                            }
 
                         }
                     }
